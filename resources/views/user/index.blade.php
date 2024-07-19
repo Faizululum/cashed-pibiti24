@@ -3,9 +3,9 @@
 
     <div class="container">
         <div class="d-flex mb-2 justify-content-between">
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+            <form class="d-flex gap-2" method="get">
+                <input type="text" class="form-control w-auto" placeholder="Cari User" name="search" value="{{ request()->search }}">
+                <button type="submit" class="btn btn-outline-success">Cari</button>
             </form>
             <a href="/users/create" class="btn btn-dark">Tambah</a>
         </div>
@@ -21,33 +21,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Farhan Hidayatullah</td>
-                        <td>farhansyah23@gmail.com</td>
-                        <td>Akif</td>
-                        <td align="right">
-                            <a href="/users/edit" class="btn btn-sm btn-primary">Edit</a>
-                            <button class="btn btn-sm btn-danger">Hapus</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Cuplis</td>
-                        <td>cuplisroyal@gmail.com</td>
-                        <td>Akif</td>
-                        <td align="right">
-                            <a href="/users/edit" class="btn btn-sm btn-primary">Edit</a>
-                            <button class="btn btn-sm btn-danger">Hapus</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Pablo</td>
-                        <td>pablosco@gmail.com</td>
-                        <td>Akif</td>
-                        <td align="right">
-                            <a href="/users/edit" class="btn btn-sm btn-primary">Edit</a>
-                            <button class="btn btn-sm btn-danger">Hapus</button>
-                        </td>
-                    </tr>
+                    @foreach ($users as $user)
+                        <tr>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>
+                                @if ($user->active)
+                                    <span class="badge text-bg-primary">Aktif</span>
+                                @else
+                                    <span class="badge text-bg-danger">Tidak Aktif</span>
+                                @endif
+                            </td>
+                            <td>
+                                <div class="d-flex justify-content-end gap-2">
+                                    <a href="{{ route('users.edit', ['user' => $user->id]) }}"
+                                        class="btn btn-sm btn-primary">Edit</a>
+                                    <form action="{{ route('users.destroy', ['user' => $user->id]) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-sm btn-danger">Hapus</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

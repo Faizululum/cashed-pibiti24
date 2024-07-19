@@ -31,11 +31,15 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" aria-current="page" href="/">Dashboard</a>
+                    <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}"
+                        href="{{ route('dashboard') }}">Dashboard</a>
                     <a class="nav-link {{ request()->routeIs('order') ? 'active' : '' }}" href="#">Order</a>
-                    <a class="nav-link {{ request()->routeIs('categories.index') ? 'active' : '' }}" href="/categories">Categories</a>
-                    <a class="nav-link {{ request()->routeIs('products.index') ? 'active' : '' }}" href="/products">Product</a>
-                    <a class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}" href="/users">Users</a>
+                    <a class="nav-link {{ request()->routeIs('categories.index') ? 'active' : '' }}"
+                        href="{{ route('categories.index') }}">Categories</a>
+                    <a class="nav-link {{ request()->routeIs('products.index') ? 'active' : '' }}"
+                        href="{{ route('products.index') }}">Product</a>
+                    <a class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}"
+                        href="{{ route('users.index') }}">Users</a>
                 </div>
             </div>
         </div>

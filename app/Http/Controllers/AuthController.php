@@ -13,7 +13,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
+            'email' => 'required|email|exists:users,email',
             'password' => 'required',
         ]);
 
@@ -28,5 +28,9 @@ class AuthController extends Controller
                 'email' => 'Email / Password tidak sesuai',
             ])
             ->onlyInput('email');
+    }
+
+    public function create() {
+
     }
 }
